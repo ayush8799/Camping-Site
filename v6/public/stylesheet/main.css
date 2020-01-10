@@ -1,0 +1,14 @@
+.thumbnailIndex img{
+    width: 100%; 
+}
+
+.thumbnailIndex{
+    padding: 0;
+}
+
+.Beech{
+     display: block;
+     margin-top: 5px;
+     margin-left: auto;
+     margin-right: auto;
+ }

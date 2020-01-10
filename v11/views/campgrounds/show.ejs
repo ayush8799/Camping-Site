@@ -1,0 +1,85 @@
+<% include ../partials/header %>  
+
+<div class="container">
+    <div class="row">
+<!--         <div class="col-md-3">
+            <p text-align="center" class="lead">YelpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>                
+            </div>
+        </div> -->
+        <div class="col-md-8">
+            <div class="thumbnail thumbnailIndex width : 100%">
+                <div>
+                    <img class="Beech" src="<%= campgrounds.image %>" >
+                    <div class="caption-full" style="padding-bottom : 40px; padding-top: 20px ; padding-left: 20px ; padding-right: 20px  ">
+                        <h6 class="pull-right">9$/Night</h6>
+                        <h4><a href="#"> <%= campgrounds.name %> </a></h4>
+                        <p>  <em> Posted by <%= campgrounds.author.username %></em>                                                           
+                        </p>                     
+                        
+                        <p><%= campgrounds.description %></p>
+                        <% if(currentUser && currentUser._id.equals(campgrounds.author.id)){ %>
+                            <div class="pull-right">
+                                <a class="btn btn-sm btn-warning" href="/campgrounds/<%= campgrounds._id %>/edit"><i class="glyphicon glyphicon-pencil"></i> EDIT</a>
+                                <form style="display: inline" action="/campgrounds/<%= campgrounds._id %>?_method=DELETE" method="POST">
+                                        <button class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i> DELETE</button>
+                                </form>
+                            </div>
+                        <% } %>                        
+                    </div>
+                </div>
+            </div>
+               
+        </div>
+        <div class="col-md-4">
+                <p text-align="center" class="lead"><h4><a href="#"> <%= campgrounds.name %> </a></h4></p>
+                <div class="list-group">
+                    <li class="list-group-item">Info 1</li>
+                    <li class="list-group-item">Info 2</li>
+                    <li class="list-group-item">Info 3</li>                
+                </div>
+                <div class="well">
+                    <div class="text-right">
+                        <a class="btn btn-success" href="/campgrounds/<%= campgrounds._id %>/comments/new" >Add Comment</a>
+                    </div>
+                    <br>
+                    <div>
+                        <% campgrounds.comments.forEach(function(comment){ %>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <strong><%= comment.author.username %></strong>
+                                    <span class="pull-right" > 
+                                        <% if(currentUser && currentUser._id.equals(comment.author.id)){ %>
+                                            <a class="btn btn-outline-white" href="/campgrounds/<%=campgrounds._id%>/comments/<%=comment._id%>/edit" ><i class="glyphicon glyphicon-pencil"></i></a>
+                                            <form style="display: inline" action="/campgrounds/<%= campgrounds._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+                                                <!-- <span class="glyphicon glyphicon-trash"></span> -->
+                                                <button class="btn btn-outline-white" ><i class="glyphicon glyphicon-trash"></i></button>
+                                                <!-- <input type="submit" <i class="glyphicon glyphicon-trash"></i> > -->
+                                                 
+                                            </form>
+                                        <% } %>    
+                                        10 days ago
+                                    </span>
+                                    <p>
+                                        <%= comment.text %>       
+                                    </p>
+                                </div>
+                            </div>                       
+                        <% }) %>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div>
+            <a class="btn btn-success" href="/campgrounds" >Back</a>
+    </div>
+</div> 
+
+
+
+
+
+<% include ../partials/footer %>  
